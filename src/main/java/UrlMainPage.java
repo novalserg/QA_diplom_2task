@@ -3,9 +3,9 @@ import io.restassured.http.ContentType;
 import io.restassured.specification.RequestSpecification;
 
 
-public class Url {
+public class UrlMainPage {
 
-    public RequestSpecification getUrlSpec() {
+    public static RequestSpecification getUrlSpec() {
         return new RequestSpecBuilder()
                 .setContentType(ContentType.JSON)
                 .setBaseUri("https://stellarburgers.nomoreparties.site")

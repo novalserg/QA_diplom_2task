@@ -1,28 +1,29 @@
 import io.qameta.allure.Step;
 import io.restassured.response.Response;
-import org.junit.After;
+import org.apache.commons.lang3.RandomStringUtils;
 
 import static io.restassured.RestAssured.given;
 
-public class CreateUser {
+public class CreateUser extends UrlMainPage {
 
-    static UserData userData = new UserData("Ivan724", "125421", "Ivan");
-    static UserData userDataNoOneField = new UserData("Leha1875", "1578163", null);
+    public static UserData dynamicUserData = new UserData(RandomStringUtils.randomAlphabetic(6) + "@mail.ru", RandomStringUtils.randomAlphabetic(7), RandomStringUtils.randomAlphabetic(6));
+    static UserData dynamicUserDataNoOneField = new UserData(RandomStringUtils.randomAlphabetic(6), RandomStringUtils.randomAlphabetic(7), null);
 
     static final String URL = ("https://stellarburgers.nomoreparties.site/api/auth/register");
 
     @Step("Send POST to create unique User")
-    public static Response CreateNewUser() {
+    public static Response CreateNewUser(UserData dynamicUserData) {
         Response responseCreateUser = given()
                 .header("Content-type", "application/json")
                 .log().all()
                 .and()
-                .body(userData)
+                .body(CreateUser.dynamicUserData)
                 .when()
                 .post(URL);
         return responseCreateUser;
     }
-
+}
+/*
     @Step("Send a POST to crate exsisting user")
     public static Response CreateSameUser() {
         CreateNewUser();
@@ -42,10 +43,9 @@ public class CreateUser {
                 .header("Content-type", "application/json")
                 .log().all()
                 .and()
-                .body(userDataNoOneField)
+                .body()
                 .when()
                 .post(URL);
         return responseCreateUserWOField;
     }
-
-}
+    */

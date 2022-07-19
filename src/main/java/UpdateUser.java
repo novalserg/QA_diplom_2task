@@ -26,6 +26,7 @@ public class UpdateUser {
     public static Response getAccessToken() {
         Response accessToken = given()
                 .header("Content-type", "application/json")
+                .relaxedHTTPSValidation()
                 .log().all()
                 .and()
                 .body(loginData)

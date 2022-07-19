@@ -4,7 +4,7 @@ import io.restassured.response.ValidatableResponse;
 
 import static io.restassured.RestAssured.given;
 
-public class DetailsUser extends Url {
+public class DetailsUser extends UrlMainPage {
 
     @Step("Регистрация пользователя")
     public ValidatableResponse registration(UserData user) {
@@ -16,7 +16,7 @@ public class DetailsUser extends Url {
     }
 
     @Step("Удаление пользователя")
-    public ValidatableResponse removal(String accessToken) {
+    public static ValidatableResponse removal(String accessToken) {
         return given()
                 .header("Authorization", accessToken)
                 .spec(getUrlSpec())

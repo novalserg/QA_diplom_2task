@@ -3,6 +3,7 @@ import io.qameta.allure.Step;
 import io.restassured.response.Response;
 import org.junit.Test;
 
+import static org.apache.http.HttpStatus.SC_FORBIDDEN;
 import static org.hamcrest.CoreMatchers.equalTo;
 
 public class LoginUserTest{
@@ -11,7 +12,7 @@ public class LoginUserTest{
         @Description("Login existing user, proper data")
         @Step("Compare ER and FR")
         public void loginUserPositiveTest(){
-                Response response = LoginUser.LoginUser();
+                Response response = LoginUser.loginUser();
                 response.then().assertThat().body("success", equalTo(true));
         }
 
@@ -19,7 +20,8 @@ public class LoginUserTest{
         @Description("Login unexisting user, wrong data")
         @Step("Compare ER and FR")
         public void loginUserWrongDataTest(){
-                Response response = LoginUser.LoginUserWrongData();
-                response.then().assertThat().statusCode(403).body("success", equalTo(false));
+                Response response = LoginUser.loginUserWrongData();
+                response.then().assertThat().statusCode(SC_FORBIDDEN).body("success", equalTo(false));
+
         }
 }

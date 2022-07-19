@@ -11,7 +11,7 @@ public class LoginUser {
     static final String URL = ("https://stellarburgers.nomoreparties.site/api/auth/register");
 
     @Step("Try to login with property data")
-    public static Response LoginUser(){
+    public static Response loginUser(){
         Response responseLoginUser = given()
                 .header("Content-type", "application/json")
                 .log().all()
@@ -23,7 +23,7 @@ public class LoginUser {
     }
 
     @Step("Try to login as unexisting user")
-    public static Response LoginUserWrongData() {
+    public static Response loginUserWrongData() {
         Response responseLoginWrongUser=given()
             .header("Content-type", "application/json")
             .log().all()
