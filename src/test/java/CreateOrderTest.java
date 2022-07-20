@@ -71,8 +71,10 @@ public class CreateOrderTest {
 
     @After
     public void deleteUser() {
-        ValidatableResponse response = detailsUser.login(userAuthorization);
-        accessToken = response.extract().path("accessToken");
-        detailsUser.removal(accessToken);
+        if (accessToken != null) {
+            CreateUser.delete(accessToken);
+        }
+        DetailsUser.removal(accessToken);
+
     }
 }

@@ -12,7 +12,8 @@ public class LoginUserTest{
         @Description("Login existing user, proper data")
         @Step("Compare ER and FR")
         public void loginUserPositiveTest(){
-                Response response = LoginUser.loginUser();
+                Response response = CreateUser.CreateNewUser(CreateUser.dynamicUserData);
+                LoginUser.loginUser();
                 response.then().assertThat().body("success", equalTo(true));
         }
 

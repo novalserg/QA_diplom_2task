@@ -6,6 +6,7 @@ import org.junit.After;
 import org.junit.Test;
 
 import static io.restassured.RestAssured.given;
+import static org.apache.commons.lang3.CharSetUtils.delete;
 import static org.apache.http.HttpStatus.*;
 import static org.hamcrest.CoreMatchers.equalTo;
 
@@ -21,6 +22,7 @@ public class CreateUserTest {
         Response response = CreateUser.CreateNewUser(CreateUser.dynamicUserData);
         response.then().assertThat().statusCode(SC_OK).body("success", equalTo(true));
         System.out.println(response.body().asString());
+        accessToken = response.then().extract().path("accessToken");
     }
 
     @Test
@@ -44,8 +46,9 @@ public class CreateUserTest {
 
     @After
     public void deleteUser() {
-        ValidatableResponse response = (ValidatableResponse) LoginUser.loginUser();
-        accessToken = response.extract().path("accessToken");
+        if (accessToken != null) {
+            CreateUser.delete(accessToken);
+        }
         DetailsUser.removal(accessToken);
 
     }

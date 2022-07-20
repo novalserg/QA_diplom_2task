@@ -22,30 +22,7 @@ public class CreateUser extends UrlMainPage {
                 .post(URL);
         return responseCreateUser;
     }
-}
-/*
-    @Step("Send a POST to crate exsisting user")
-    public static Response CreateSameUser() {
-        CreateNewUser();
-        Response responseCreateSameUser = given()
-                .header("Content-type", "application/json")
-                .log().all()
-                .and()
-                .body(userData)
-                .when()
-                .post(URL);
-        return responseCreateSameUser;
-    }
 
-    @Step("Send a POST without one field (name)")
-    public static Response createUserWOField() {
-        Response responseCreateUserWOField = given()
-                .header("Content-type", "application/json")
-                .log().all()
-                .and()
-                .body()
-                .when()
-                .post(URL);
-        return responseCreateUserWOField;
+    public static void delete(String accessToken) {
     }
-    */
+}
