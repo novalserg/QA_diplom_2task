@@ -24,5 +24,13 @@ public class CreateUser extends UrlMainPage {
     }
 
     public static void delete(String accessToken) {
+        Response responseDeleteUser = given()
+                .header("Content-type", "application/json")
+                .log().all()
+                .and()
+                .body(accessToken)
+                .when()
+                .delete(UpdateUser.URLauth);
+
     }
 }
